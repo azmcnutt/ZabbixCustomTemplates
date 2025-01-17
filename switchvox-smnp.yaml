@@ -1,0 +1,227 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    -
+      uuid: e754cf258e324b5eaa4bcf615df64491
+      name: Templates/Sensors
+  templates:
+    -
+      uuid: eb193a09b1cf45c080d95ad0caa4e730
+      template: 'Sangoma Switchvox by SNMP'
+      name: 'Sangoma Switchvox by SNMP'
+      description: '## Montioring of Switchvox by SNMP.'
+      # The Switchvox prefix is .1.3.6.1.4.1.22736.10
+      groups:
+        -
+          name: Templates/Telephony
+      items:
+        # .1 Switchvox Information
+        -
+          uuid: ec0372eebffb4a6caa953dfed1cae318
+          name: 'software version'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.1.1
+          key: softwareVersion
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: CHAR
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox Software Version.
+        -
+          uuid: 0ebb2847ad584dda8598beea2d7d68af
+          name: 'max concurrent calls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.1.2
+          key: maxConcurrentCalls
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: FLOAT
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox Max Concurent Calls.
+        -
+          uuid: d7bdf8aad73d47adaa0cbb49516fc6bf
+          name: 'used feature packs'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.1.3
+          key: usedFeaturePacks
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: FLOAT
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox Used Feature Packs.
+        -
+          uuid: 285fdc918a1f4391b9c711dea858c52f
+          name:	'max feature packs'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.1.4
+          key:	maxFeaturePacks
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: FLOAT
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox Max Feature Packs.
+        -
+          uuid: 648fa7bff77d49eca703e374408d8750
+          name:	'used extensions'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.1.5
+          key:	usedExtensions
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: FLOAT
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox Used Extensions.
+        -
+          uuid: c28c6fd374044ff3b6b4a372ec7a190d
+          name:	'max extensions'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.1.6
+          key:	maxExtensions
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: FLOAT
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox Max Extensions.
+        # .2 VOIP Providers
+        -
+          uuid: b9dcea2d4f354b3795c6f05f6a51803a
+          name:	'number of VOIP providers'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.2.1
+          key:	numberOfVOIPProviders
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: FLOAT
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox number of VOIP providers.
+        -
+          uuid: e79bfcf96b764ff88627a38e05d6923a
+          name:	'number of state ok VOIP providers'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.2.2
+          key:	numberOfStateOkVOIPProviders
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: FLOAT
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox number of state Ok VOIP providers.
+        -
+          uuid: 060e2fa4b1fc47bf99f6dfdcfad15cc7
+          name:	'first VOIP provider id'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.2.3.1.1
+          key:	firstVOIPProviderId
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: FLOAT
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox first VOIP provider id.
+        -
+          uuid: 791e4d77359249028e64918697b0e14e
+          name:	'first VOIP provider type'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.2.3.1.2
+          key:	firstVOIPProviderType
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: CHAR
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox first VOIP provider type.
+        -
+          uuid: 5b901c621b1a4c5eb9a30ce33a5663e7
+          name:	'first VOIP provider name'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.2.3.1.3
+          key:	firstVOIPProviderName
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: CHAR
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox first VOIP provider name.
+        -
+          uuid: f7d91702d6d14fe48d0048c40c1ed7cb
+          name:	'first VOIP provider host'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.2.3.1.4
+          key:	firstVOIPProviderHost
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: CHAR
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox first VOIP provider host.
+        -
+          uuid: 9dac31f21fbe4edbbcbca8637a1ed28b
+          name:	'first VOIP provider account id'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.2.3.1.5
+          key:	firstVOIPProviderAccountId
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: CHAR
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox first VOIP provider account id.
+        -
+          uuid: 5037c33835e54290bf64d6cf0f30ccde
+          name:	'first VOIP provider callback extension'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.2.3.1.6
+          key:	firstVOIPProviderCallbackExtension
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: CHAR
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox first VOIP provider callback extension.
+        -
+          uuid: d6c97d97332d417da104f24dcbc9f6dc
+          name:	'first VOIP provider latency'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.2.3.1.7
+          key:	firstVOIPproviderlatency
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: FLOAT
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox first VOIP provider latency.
+        -
+          uuid: 7335ce5b21144d4ebb2f4f1a8ca0d104
+          name:	'first VOIP provider state'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.2.3.1.8
+          key:	firstVOIPProviderState
+          delay: 1h
+          history: 90d
+          trends: '365d'
+          value_type: CHAR
+          description: |
+                MIB: SNMPv2-MIB
+                Switchvox first VOIP provider state.
