@@ -9,126 +9,293 @@ zabbix_export:
       uuid: eb193a09b1cf45c080d95ad0caa4e730
       template: 'Sangoma Switchvox by SNMP'
       name: 'Sangoma Switchvox by SNMP'
-      description: '## Montioring of Switchvox by SNMP.'
+      description: |
+          ## Montioring of Switchvox by SNMP.
+          Switchvox is Digium's family of Voice Over IP Phone systems 
+          for small and medium businesses.'
       # The Switchvox prefix is .1.3.6.1.4.1.22736.10
       groups:
         -
           name: Templates/Telephony
       items:
-        # .1 Switchvox Information
         -
           uuid: ec0372eebffb4a6caa953dfed1cae318
-          name: 'software version'
+          name: 'switchvoxInfo: software version'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.1.1
-          key: softwareVersion
+          key: switchvoxInfo.svoxSoftwareVersion
           delay: 1h
           history: 90d
           trends: '0'
           value_type: CHAR
           description: |
-                MIB: SNMPv2-MIB
-                Switchvox Software Version.
+                MIB: SWITCHVOX-MIB
+                Software version
+                ::= { switchvoxInfo 1 }
         -
           uuid: 0ebb2847ad584dda8598beea2d7d68af
-          name: 'max concurrent calls'
+          name: 'switchvoxInfo: max concurrent calls'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.1.2
-          key: maxConcurrentCalls
+          key: switchvoxInfo.svoxMaxConcurrentCalls
           delay: 1h
           history: 90d
           trends: '0'
           value_type: FLOAT
           description: |
-                MIB: SNMPv2-MIB
-                Switchvox Max Concurent Calls.
+                MIB: SWITCHVOX-MIB
+                Maximum concurrent calls
+                ::= { switchvoxInfo 2 }
         -
           uuid: d7bdf8aad73d47adaa0cbb49516fc6bf
-          name: 'used feature packs'
+          name: 'switchvoxInfo: used feature packs'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.1.3
-          key: usedFeaturePacks
+          key: switchvoxInfo.svoxUsedPhoneConfigFeaturePacks
           delay: 1h
           history: 90d
           trends: '0'
           value_type: FLOAT
           description: |
-                MIB: SNMPv2-MIB
-                Switchvox Used Feature Packs.
+                MIB: SWITCHVOX-MIB
+                Used phone configuration feature packs
+                ::= { switchvoxInfo 3 }
         -
           uuid: 285fdc918a1f4391b9c711dea858c52f
-          name:	'max feature packs'
+          name:	'switchvoxInfo: max feature packs'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.1.4
-          key:	maxFeaturePacks
+          key:	switchvoxInfo.svoxMaxPhoneConfigFeaturePacks
           delay: 1h
           history: 90d
           trends: '0'
           value_type: FLOAT
           description: |
-                MIB: SNMPv2-MIB
-                Switchvox Max Feature Packs.
+                MIB: SWITCHVOX-MIB
+                Maximum phone configuration feature packs
+                ::= { switchvoxInfo 4 }
         -
           uuid: 648fa7bff77d49eca703e374408d8750
-          name:	'used extensions'
+          name:	'switchvoxInfo: used extensions'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.1.5
-          key:	usedExtensions
+          key:	switchvoxInfo.svoxUsedExtensions
           delay: 1h
           history: 90d
           trends: '0'
           value_type: FLOAT
           description: |
-                MIB: SNMPv2-MIB
-                Switchvox Used Extensions.
+                MIB: SWITCHVOX-MIB
+                Used extensions
+                ::= { switchvoxInfo 5 }
         -
           uuid: c28c6fd374044ff3b6b4a372ec7a190d
-          name:	'max extensions'
+          name:	'switchvoxInfo: max extensions'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.1.6
-          key:	maxExtensions
+          key:	switchvoxInfo.svoxMaxExtensions
           delay: 1h
           history: 90d
           trends: '0'
           value_type: FLOAT
           description: |
-                MIB: SNMPv2-MIB
-                Switchvox Max Extensions.
-        # .2 VOIP Providers
+                MIB: SWITCHVOX-MIB
+                Maximum extensions
+                ::= { switchvoxInfo 6 }
         -
           uuid: b9dcea2d4f354b3795c6f05f6a51803a
-          name:	'VOIP Providers Num of VOIP providers'
+          name:	'switchvoxVoipProviders: svoxVoipProviders'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.2.1
-          key:	voip.provider.numberOfVOIPProviders
+          key:	switchvoxVoipProviders.svoxVoipProviders
           delay: 1h
           history: 90d
           trends: '0'
           value_type: FLOAT
           description: |
-                MIB: SNMPv2-MIB
-                Switchvox number of VOIP providers.
+                MIB: SWITCHVOX-MIB
+                Current number of active voip providers
+                ::= { switchvoxVoipProviders 1 }
         -
           uuid: e79bfcf96b764ff88627a38e05d6923a
-          name:	'VOIP Providers Num of ok Providers'
+          name:	'switchvoxVoipProviders: svoxAvailableVoipProviders'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.2.2
-          key:	voip.provider.numberOfStateOkVOIPProviders
+          key:	switchvoxVoipProviders.svoxAvailableVoipProviders
           delay: 1h
           history: 90d
           trends: '0'
           value_type: FLOAT
           description: |
-                MIB: SNMPv2-MIB
-                Switchvox number of state Ok VOIP providers. 
+                MIB: SWITCHVOX-MIB
+                Current number of active and available voip providers
+                ::= { switchvoxVoipProviders 2 }
+        -
+          uuid: 3f335c120ff4410e8bc14273b67ebf3e
+          name:	'switchvoxHardwareStatus: svoxMemoryUsed'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.1.1
+          key:	switchvoxHardwareStatus.svoxMemoryUsed
+          delay: 1h
+          history: 90d
+          trends: '0'
+          value_type: FLOAT
+          description: |
+                MIB: SWITCHVOX-MIB
+                Memory Used
+        -
+          uuid: 9496914d063047b5a3bff526cb986bba
+          name:	'switchvoxHardwareStatus: svoxMemoryTotal'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.1.2
+          key:	switchvoxHardwareStatus.svoxMemoryTotal
+          delay: 1h
+          history: 90d
+          trends: '0'
+          value_type: FLOAT
+          description: |
+                MIB: SWITCHVOX-MIB
+                Memory Total
+        -
+          uuid: 991fbfe175c94724b9bbdb18297cb05f
+          name:	'switchvoxHardwareStatus: svoxSwapUsed'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.1.3
+          key:	switchvoxHardwareStatus.svoxSwapUsed
+          delay: 1h
+          history: 90d
+          trends: '0'
+          value_type: FLOAT
+          description: |
+                MIB: SWITCHVOX-MIB
+                Swap Used
+        -
+          uuid: eddd82160e944ddc87f339dde83209ad
+          name:	'switchvoxHardwareStatus: svoxSwapTotal'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.1.4
+          key:	switchvoxHardwareStatus.svoxSwapTotal
+          delay: 1h
+          history: 90d
+          trends: '0'
+          value_type: FLOAT
+          description: |
+                MIB: SWITCHVOX-MIB
+                Swap Total
+        -
+          uuid: 2fe820edae664e6db222b38914e58713
+          name:	'switchvoxHardwareStatus: svoxMemoryInfoLastUpdate'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.1.5
+          key:	switchvoxHardwareStatus.svoxMemoryInfoLastUpdate
+          delay: 1h
+          history: 90d
+          trends: '0'
+          value_type: TEXT
+          description: |
+                MIB: SWITCHVOX-MIB
+                Memory Info Last Updated
+        -
+          uuid: 4e91183a6bc14571837d96a132a1a4cb
+          name:	'switchvoxHardwareStatus: svoxDiskUsed'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.2.1
+          key:	switchvoxHardwareStatus.svoxDiskUsed
+          delay: 1h
+          history: 90d
+          trends: '0'
+          value_type: FLOAT
+          description: |
+                MIB: SWITCHVOX-MIB
+                Disk Used
+        -
+          uuid: 246b8560694349cb88c44c8da05ea871
+          name:	'switchvoxHardwareStatus: svoxDiskTotal'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.2.2
+          key:	switchvoxHardwareStatus.svoxDiskTotal
+          delay: 1h
+          history: 90d
+          trends: '0'
+          value_type: FLOAT
+          description: |
+                MIB: SWITCHVOX-MIB
+                Disk Total
+        -
+          uuid: 8253648fa56149b18212a351b9cc48bd
+          name:	'switchvoxHardwareStatus: svoxDiskInfoLastUpdate'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.2.3
+          key:	switchvoxHardwareStatus.svoxDiskInfoLastUpdate
+          delay: 1h
+          history: 90d
+          trends: '0'
+          value_type: TEXT
+          description: |
+                MIB: SWITCHVOX-MIB
+                Disk Info Last Updated
+        -
+          uuid: f346b6849b9c417a94d0457f2ecb62f2
+          name:	'switchvoxHardwareStatus: svoxLoad'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.3.1
+          key:	switchvoxHardwareStatus.svoxLoad
+          delay: 1h
+          history: 90d
+          trends: '0'
+          value_type: TEXT
+          description: |
+                MIB: SWITCHVOX-MIB
+                Details of the machines load
+        -
+          uuid: e18beac6ffcc403e8d751e187eb66f10
+          name:	'switchvoxPhoneStatus: svoxPhoneStatus'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.4.1
+          key:	switchvoxPhoneStatus.svoxPhoneStatus
+          delay: 1h
+          history: 90d
+          trends: '0'
+          value_type: FLOAT
+          description: |
+                MIB: SWITCHVOX-MIB
+                Current number of provisioned phones
+                ::= { switchvoxPhoneStatus 1 }
+        -
+          uuid: 7642b231a48948b5a9b721f2fbc3bdb7
+          name:	'switchvoxPhoneStatus: svoxAvailablePhoneStatus'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.4.2
+          key:	switchvoxPhoneStatus.svoxAvailablePhoneStatus
+          delay: 1h
+          history: 90d
+          trends: '0'
+          value_type: FLOAT
+          description: |
+                MIB: SWITCHVOX-MIB
+                Current number of provisioned and available phones
+                ::= { switchvoxPhoneStatus 2 }
       discovery_rules:
-        - uuid: 060e2fa4b1fc47bf99f6dfdcfad15cc7
-          name: 'VOIP Provider Discovery'
+        -
+          uuid: 060e2fa4b1fc47bf99f6dfdcfad15cc7
+          name: 'switchvoxVoipProviders.discovery'
           type: SNMP_AGENT
           snmp_oid: 'walk[.1.3.6.1.4.1.22736.10.2.3]'
-          key: voip.provider.discovery
+          key: switchvoxVoipProviders.discovery
           delay: 1h
-          description: 'voipoProviderIndex: The index of the voip provider.'
+          description: |
+                MIB: SWITCHVOX-MIB
+                Table with details of the currently active voip providers.
+                ::= { switchvoxVoipProviders 3 }
+                SvoxVoipProvEntry ::= SEQUENCE {
+                    svoxVoipProvId	  Integer32,
+                    svoxVoipProvName	  DisplayString,
+                    svoxVoipProvHost	  DisplayString,
+                    svoxVoipProvAcctId      Integer32,
+                    svoxVoipProvCallBack    Integer32,
+                    svoxVoipProvLatency     Integer32,
+                    svoxVoipProvState	  DisplayString
+                }
           preprocessing:
                 - type: JAVASCRIPT
                   parameters:
@@ -173,84 +340,225 @@ zabbix_export:
                           }\r\n]';
                       return (result);
           item_prototypes:
-            - uuid: 791e4d77359249028e64918697b0e14e
-              name: 'VOIP Provider {#VPID}({#VPNAME}): ID'
+            -
+              uuid: 791e4d77359249028e64918697b0e14e
+              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvId'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.1'
-              key: 'voip.provider[id.{#VPID}]'
+              key: 'switchvoxVoipProviders[svoxVoipProvId.{#VPID}]'
               delay: 1h
               value_type: FLOAT
               trends: '0'
               description: |
-                MIB: SWITCHVOX-MIB::switchvoxVoipProviders 1
-                The VOIP Provider ID'
-            - uuid: 42bc67a9572c4ce892daf4cd6ec0a19e
-              name: 'VOIP Provider {#VPID}({#VPNAME}): Type'
+                    MIB: SWITCHVOX-MIB
+                    The VOIP Provider ID
+            -
+              uuid: 42bc67a9572c4ce892daf4cd6ec0a19e
+              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvType'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.2'
-              key: 'voip.provider[type.{#VPID}]'
+              key: 'switchvoxVoipProviders[svoxVoipProvType.{#VPID}]'
               delay: 1h
               value_type: TEXT
               description: |
-                MIB: SWITCHVOX-MIB::switchvoxVoipProviders 2
-                The VOIP Provider Connection Type'
-            - uuid: 5b901c621b1a4c5eb9a30ce33a5663e7
-              name: 'VOIP Provider {#VPID}({#VPNAME}): Name'
+                    MIB: SWITCHVOX-MIB
+                    The VOIP Provider Type
+            -
+              uuid: 5b901c621b1a4c5eb9a30ce33a5663e7
+              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvName'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.3'
-              key: 'voip.provider[name.{#VPID}]'
+              key: 'switchvoxVoipProviders[svoxVoipProvName.{#VPID}]'
               delay: 1h
               value_type: TEXT
               description: |
-                MIB: SWITCHVOX-MIB::switchvoxVoipProviders 3
-                The VOIP Provider Connection Name'
-            - uuid: f7d91702d6d14fe48d0048c40c1ed7cb
-              name: 'VOIP Provider {#VPID}({#VPNAME}): Host'
+                    MIB: SWITCHVOX-MIB
+                    The VOIP Provider Name
+            -
+              uuid: f7d91702d6d14fe48d0048c40c1ed7cb
+              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvHost'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.4'
-              key: 'voip.provider[host.{#VPID}]'
+              key: 'switchvoxVoipProviders[svoxVoipProvHost.{#VPID}]'
               delay: 1h
               value_type: TEXT
               description: |
-                MIB: SWITCHVOX-MIB::switchvoxVoipProviders 4
-                The VOIP Provider Connection Host'
-            - uuid: 9dac31f21fbe4edbbcbca8637a1ed28b
-              name: 'VOIP Provider {#VPID}({#VPNAME}): Account Id'
+                    MIB: SWITCHVOX-MIB
+                    The VOIP Provider Host
+            -
+              uuid: 9dac31f21fbe4edbbcbca8637a1ed28b
+              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvAcctId'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.5'
-              key: 'voip.provider[account.id.{#VPID}]'
+              key: 'switchvoxVoipProviders[svoxVoipProvAcctId.{#VPID}]'
               delay: 1h
               value_type: TEXT
               description: |
-                MIB: SWITCHVOX-MIB::switchvoxVoipProviders 5
-                The VOIP Provider Connection Account ID'
-            - uuid: 5037c33835e54290bf64d6cf0f30ccde
-              name: 'VOIP Provider {#VPID}({#VPNAME}): Callback Ext.'
+                    MIB: SWITCHVOX-MIB
+                    The VOIP Provider Account ID
+            -
+              uuid: 5037c33835e54290bf64d6cf0f30ccde
+              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvCallBack'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.6'
-              key: 'voip.provider[callback.ext.{#VPID}]'
+              key: 'switchvoxVoipProviders[svoxVoipProvCallBack.{#VPID}]'
               delay: 1h
               value_type: TEXT
               description: |
-                MIB: SWITCHVOX-MIB::switchvoxVoipProviders 6
-                The VOIP Provider Connection Account Callback extension.'
-            - uuid: d6c97d97332d417da104f24dcbc9f6dc
-              name: 'VOIP Provider {#VPID}({#VPNAME}): Latency'
+                    MIB: SWITCHVOX-MIB
+                    The VOIP Provider ID
+            -
+              uuid: d6c97d97332d417da104f24dcbc9f6dc
+              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvLatency'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.7'
-              key: 'voip.provider[latency.{#VPID}]'
+              key: 'switchvoxVoipProviders[svoxVoipProvLatency.{#VPID}]'
               delay: 1h
               value_type: TEXT
               description: |
-                MIB: SWITCHVOX-MIB::switchvoxVoipProviders 7
-                The VOIP Provider Connection Account Latency.'
-            - uuid: 7335ce5b21144d4ebb2f4f1a8ca0d104
-              name: 'VOIP Provider {#VPID}({#VPNAME}): State'
+                    MIB: SWITCHVOX-MIB
+                    The VOIP Provider Latency
+            -
+              uuid: 7335ce5b21144d4ebb2f4f1a8ca0d104
+              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvState'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.8'
-              key: 'voip.provider[state.{#VPID}]'
+              key: 'switchvoxVoipProviders[svoxVoipProvState.{#VPID}]'
               delay: 1h
               value_type: TEXT
               description: |
-                MIB: SWITCHVOX-MIB::switchvoxVoipProviders 8
-                The VOIP Provider Connection Account State.'
+                    MIB: SWITCHVOX-MIB
+                    The VOIP Provider State
+
+
+
+        -
+          uuid: 3e1d8907101246faa13cbed0e21c397d
+          name: 'switchvoxPhoneStatus.discovery'
+          type: SNMP_AGENT
+          snmp_oid: 'walk[.1.3.6.1.4.1.22736.10.4.3]'
+          key: switchvoxPhoneStatus.discovery
+          delay: 1h
+          description: |
+                MIB: SWITCHVOX-MIB
+                Table with details of the provisioned phones.
+                ::= { switchvoxPhoneStatus 3 }
+                SvoxPhoneStatusEntry ::= SEQUENCE {
+                  svoxPhoneStatusId		Integer32,
+                  svoxPhoneStatusExtension	Integer32,
+                  svoxPhoneStatusCallerId	DisplayString,
+                  svoxPhoneStatusUserAgent      DisplayString,
+                  svoxPhoneStatusIpAddress    	DisplayString,
+                  svoxPhoneStatusState	  	DisplayString
+                }
+          preprocessing:
+                - type: JAVASCRIPT
+                  parameters:
+                    - |
+                      var arr = value.split("\n");
+                      var result = "";
+                      var cur = 1;
+                      var snmpindex = '';
+                      var psid = '';
+                      var psext = '';
+                      result = "[";
+                      for (var i = 0; i < arr.length; i++)
+                      {
+                          var el = arr[i].substring(26,27);
+                          if (el == cur) {
+                              snmpindex = el;
+                              if (arr[i].substring(28,29) == '1')
+                              {
+                                  temp = arr[i].split(': ');
+                                  psid = temp[1];
+                              }else if (arr[i].substring(28,29) == '2'){
+                                  temp = arr[i].split(': ');
+                                  psext = temp[1];
+                              }
+                          }else{
+                              result = result + '\r\n\
+                          {\r\n\
+                              "{#SNMPINDEX}":' + cur + ',\r\n\
+                              "{#PSID}": ' + psid + ',\r\n\
+                              "{#PSEXT}": ' + psext +'\r\n\
+                          },\r\n';
+                              cur = el;
+                              psid = arr[i].split(': ')[1];
+                              psext = '';
+                          }
+                      }
+                      result = result + '\r\n\
+                          {\r\n\
+                              "{#SNMPINDEX}":' + cur + ',\r\n\
+                              "{#PSID}": ' + psid + ',\r\n\
+                              "{#PSEXT}": ' + psid +'\r\n\
+                          }\r\n]';
+                      return (result);
+          item_prototypes:
+            -
+              uuid: 381545dbc1034dc0babbdf1cfcdcfa5a
+              name: 'switchvoxPhoneStatus {#PSID}({#PSEXT}): svoxPhoneStatusId'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.1'
+              key: 'switchvoxPhoneStatus[svoxPhoneStatusId.{#PSID}]'
+              delay: 1h
+              value_type: FLOAT
+              trends: '0'
+              description: |
+                    MIB: SWITCHVOX-MIB
+                    The SIP Phone Provider ID
+            -
+              uuid: f566941321414b3080c02feb26b27e64
+              name: 'switchvoxPhoneStatus {#PSID}({#PSEXT}): svoxPhoneStatusExtension'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.2'
+              key: 'switchvoxPhoneStatus[svoxPhoneStatusExtension.{#PSID}]'
+              delay: 1h
+              value_type: TEXT
+              description: |
+                    MIB: SWITCHVOX-MIB
+                    The SIP Phone Extension
+            -
+              uuid: 3a95dfcd66a2439287e2745772366904
+              name: 'switchvoxPhoneStatus {#PSID}({#PSEXT}): svoxPhoneStatusCallerId'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.3'
+              key: 'switchvoxPhoneStatus[svoxPhoneStatusCallerId.{#PSID}]'
+              delay: 1h
+              value_type: TEXT
+              description: |
+                    MIB: SWITCHVOX-MIB
+                    The SIP Phone Caller ID
+            -
+              uuid: 6d728dd159c348259847f35048f3f309
+              name: 'switchvoxPhoneStatus {#PSID}({#PSEXT}): svoxPhoneStatusUserAgent'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.4'
+              key: 'switchvoxPhoneStatus[svoxPhoneStatusUserAgent.{#PSID}]'
+              delay: 1h
+              value_type: TEXT
+              description: |
+                    MIB: SWITCHVOX-MIB
+                    The SIP Phone User Agent
+            -
+              uuid: a7893ac967374348850fff5166b0f83f
+              name: 'switchvoxPhoneStatus {#PSID}({#PSEXT}): svoxPhoneStatusIpAddress'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.5'
+              key: 'switchvoxPhoneStatus[svoxPhoneStatusIpAddress.{#PSID}]'
+              delay: 1h
+              value_type: TEXT
+              description: |
+                    MIB: SWITCHVOX-MIB
+                    The SIP Phone IP Address
+            -
+              uuid: 6ebbd14434094646a59c89414b0d8e6c
+              name: 'switchvoxPhoneStatus {#PSID}({#PSEXT}): svoxPhoneStatusState'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.6'
+              key: 'switchvoxPhoneStatus[svoxPhoneStatusState.{#PSID}]'
+              delay: 1h
+              value_type: TEXT
+              description: |
+                    MIB: SWITCHVOX-MIB
+                    The SIP Phone Status

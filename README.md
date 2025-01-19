@@ -9,7 +9,7 @@ https://www.youtube.com/watch?v=YUzWZTDOCFM
 https://www.reddit.com/r/zabbix/comments/100r97g/trying_to_understand_snmp_discovery_i/
 
 UUID Generator
-https://www.marcnuri.com/uuid
+https://www.guidgenerator.com/
 
 
 Switchvox: switchvox-snmp.yaml
