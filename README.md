@@ -8,5 +8,9 @@ https://youtu.be/G-t3tXRm2v8
 https://www.youtube.com/watch?v=YUzWZTDOCFM
 https://www.reddit.com/r/zabbix/comments/100r97g/trying_to_understand_snmp_discovery_i/
 
+UUID Generator
+https://www.marcnuri.com/uuid
+
+
 Switchvox: switchvox-snmp.yaml
 Brocade: brocade_foundry_stackable-snmp.yaml - exported from Zabbix 7.2 to use as an example file.
