@@ -20,7 +20,7 @@ zabbix_export:
       items:
         -
           uuid: ec0372eebffb4a6caa953dfed1cae318
-          name: 'switchvoxInfo: software version'
+          name: 'switchvoxInfo: svoxSoftwareVersion'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.1.1
           key: switchvoxInfo.svoxSoftwareVersion
@@ -34,7 +34,7 @@ zabbix_export:
                 ::= { switchvoxInfo 1 }
         -
           uuid: 0ebb2847ad584dda8598beea2d7d68af
-          name: 'switchvoxInfo: max concurrent calls'
+          name: 'switchvoxInfo: svoxMaxConcurrentCalls'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.1.2
           key: switchvoxInfo.svoxMaxConcurrentCalls
@@ -48,7 +48,7 @@ zabbix_export:
                 ::= { switchvoxInfo 2 }
         -
           uuid: d7bdf8aad73d47adaa0cbb49516fc6bf
-          name: 'switchvoxInfo: used feature packs'
+          name: 'switchvoxInfo: svoxUsedPhoneConfigFeaturePacks'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.1.3
           key: switchvoxInfo.svoxUsedPhoneConfigFeaturePacks
@@ -62,7 +62,7 @@ zabbix_export:
                 ::= { switchvoxInfo 3 }
         -
           uuid: 285fdc918a1f4391b9c711dea858c52f
-          name:	'switchvoxInfo: max feature packs'
+          name:	'switchvoxInfo: svoxMaxPhoneConfigFeaturePacks'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.1.4
           key:	switchvoxInfo.svoxMaxPhoneConfigFeaturePacks
@@ -76,7 +76,7 @@ zabbix_export:
                 ::= { switchvoxInfo 4 }
         -
           uuid: 648fa7bff77d49eca703e374408d8750
-          name:	'switchvoxInfo: used extensions'
+          name:	'switchvoxInfo: svoxUsedExtensions'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.1.5
           key:	switchvoxInfo.svoxUsedExtensions
@@ -90,7 +90,7 @@ zabbix_export:
                 ::= { switchvoxInfo 5 }
         -
           uuid: c28c6fd374044ff3b6b4a372ec7a190d
-          name:	'switchvoxInfo: max extensions'
+          name:	'switchvoxInfo: svoxMaxExtensions'
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.1.6
           key:	switchvoxInfo.svoxMaxExtensions
@@ -300,119 +300,73 @@ zabbix_export:
                 - type: JAVASCRIPT
                   parameters:
                     - |
-                      var arr = value.split("\n");
-                      var result = "";
-                      var cur = 1;
-                      var snmpindex = '';
-                      var vpid = '';
-                      var vpname = '';
-                      result = "[";
-                      for (var i = 0; i < arr.length; i++)
-                      {
-                          var el = arr[i].substring(26,27);
-                          if (el == cur) {
-                              snmpindex = el;
-                              if (arr[i].substring(28,29) == '1')
-                              {
-                                  temp = arr[i].split(': ');
-                                  vpid = temp[1];
-                              }else if (arr[i].substring(28,29) == '3'){
-                                  temp = arr[i].split(': ');
-                                  vpname = temp[1];
-                              }
-                          }else{
-                              result = result + '\r\n\
-                          {\r\n\
-                              "{#SNMPINDEX}":' + cur + ',\r\n\
-                              "{#VPID}": ' + vpid + ',\r\n\
-                              "{#VPNAME}": ' + vpname +'\r\n\
-                          },\r\n';
-                              cur = el;
-                              vpid = arr[i].split(': ')[1];
-                              vpname = '';
+                      Array.prototype.contains = function(obj) {
+                      var i = this.length;
+                      while (i--) {
+                          if (this[i] === obj) {
+                              return true;
                           }
                       }
-                      result = result + '\r\n\
-                          {\r\n\
-                              "{#SNMPINDEX}":' + cur + ',\r\n\
-                              "{#VPID}": ' + vpid + ',\r\n\
-                              "{#VPNAME}": ' + vpname +'\r\n\
-                          }\r\n]';
+                      return false;
+                      }
+                      var arr = value.split("\n");
+                      var snmp_id = [];
+                      var data_id = {};
+                      var data_name = {};
+                      var result = "[\r\n";
+                      for (var i = 0; i < arr.length; i++)
+                      {
+                          var test = arr[i].split(': ');
+                          var value = test[1];
+                          test = test[0].split(' = ');
+                          var oid_data = test[0].split('.');
+                          if (!snmp_id.contains(oid_data[oid_data.length - 2]))
+                          {
+                              snmp_id.push(oid_data[oid_data.length - 2])
+                          }
+                          if (oid_data[oid_data.length -1] == '1')
+                          {
+                              data_id[oid_data[oid_data.length - 2]] = value;
+                          }
+                          else if (oid_data[oid_data.length - 1] == '3')
+                          {
+                              data_name[oid_data[oid_data.length - 2]] = value;
+                          }
+                      }
+                      for (var i = 0; i < snmp_id.length; i++)
+                      {
+                          result = result + '    {\r\n        "{#SNMPINDEX}": "' + snmp_id[i] + '",\r\n';
+                          result = result + '        "{#DATAID}": "' + data_id[snmp_id[i]] + '",\r\n';
+                          result = result + '        "{#DATANAME}": ' + data_name[snmp_id[i]] + '\r\n    }';
+                          if (i == snmp_id.length - 1)
+                          {
+                              result = result + '\r\n';
+                          }
+                          else
+                          {
+                              result = result + ',\r\n';
+                          }
+                      }
+                      result = result + ']';
                       return (result);
           item_prototypes:
             -
-              uuid: 791e4d77359249028e64918697b0e14e
-              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvId'
-              type: SNMP_AGENT
-              snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.1'
-              key: 'switchvoxVoipProviders[svoxVoipProvId.{#VPID}]'
-              delay: 1h
-              value_type: FLOAT
-              trends: '0'
-              description: |
-                    MIB: SWITCHVOX-MIB
-                    The VOIP Provider ID
-            -
               uuid: 42bc67a9572c4ce892daf4cd6ec0a19e
-              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvType'
+              name: 'switchvoxVoipProviders {#DATAID}({#DATANAME}): svoxVoipProvType'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.2'
-              key: 'switchvoxVoipProviders[svoxVoipProvType.{#VPID}]'
+              key: 'switchvoxVoipProviders[svoxVoipProvType.{#DATAID}]'
               delay: 1h
               value_type: TEXT
               description: |
                     MIB: SWITCHVOX-MIB
                     The VOIP Provider Type
             -
-              uuid: 5b901c621b1a4c5eb9a30ce33a5663e7
-              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvName'
-              type: SNMP_AGENT
-              snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.3'
-              key: 'switchvoxVoipProviders[svoxVoipProvName.{#VPID}]'
-              delay: 1h
-              value_type: TEXT
-              description: |
-                    MIB: SWITCHVOX-MIB
-                    The VOIP Provider Name
-            -
-              uuid: f7d91702d6d14fe48d0048c40c1ed7cb
-              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvHost'
-              type: SNMP_AGENT
-              snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.4'
-              key: 'switchvoxVoipProviders[svoxVoipProvHost.{#VPID}]'
-              delay: 1h
-              value_type: TEXT
-              description: |
-                    MIB: SWITCHVOX-MIB
-                    The VOIP Provider Host
-            -
-              uuid: 9dac31f21fbe4edbbcbca8637a1ed28b
-              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvAcctId'
-              type: SNMP_AGENT
-              snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.5'
-              key: 'switchvoxVoipProviders[svoxVoipProvAcctId.{#VPID}]'
-              delay: 1h
-              value_type: TEXT
-              description: |
-                    MIB: SWITCHVOX-MIB
-                    The VOIP Provider Account ID
-            -
-              uuid: 5037c33835e54290bf64d6cf0f30ccde
-              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvCallBack'
-              type: SNMP_AGENT
-              snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.6'
-              key: 'switchvoxVoipProviders[svoxVoipProvCallBack.{#VPID}]'
-              delay: 1h
-              value_type: TEXT
-              description: |
-                    MIB: SWITCHVOX-MIB
-                    The VOIP Provider ID
-            -
               uuid: d6c97d97332d417da104f24dcbc9f6dc
-              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvLatency'
+              name: 'switchvoxVoipProviders {#DATAID}({#DATANAME}): svoxVoipProvLatency'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.7'
-              key: 'switchvoxVoipProviders[svoxVoipProvLatency.{#VPID}]'
+              key: 'switchvoxVoipProviders[svoxVoipProvLatency.{#DATAID}]'
               delay: 1h
               value_type: TEXT
               description: |
@@ -420,10 +374,10 @@ zabbix_export:
                     The VOIP Provider Latency
             -
               uuid: 7335ce5b21144d4ebb2f4f1a8ca0d104
-              name: 'switchvoxVoipProviders {#VPID}({#VPNAME}): svoxVoipProvState'
+              name: 'switchvoxVoipProviders {#DATAID}({#DATANAME}): svoxVoipProvState'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.8'
-              key: 'switchvoxVoipProviders[svoxVoipProvState.{#VPID}]'
+              key: 'switchvoxVoipProviders[svoxVoipProvState.{#DATAID}]'
               delay: 1h
               value_type: TEXT
               description: |
@@ -455,108 +409,62 @@ zabbix_export:
                 - type: JAVASCRIPT
                   parameters:
                     - |
-                      var arr = value.split("\n");
-                      var result = "";
-                      var cur = 1;
-                      var snmpindex = '';
-                      var psid = '';
-                      var psext = '';
-                      result = "[";
-                      for (var i = 0; i < arr.length; i++)
-                      {
-                          var el = arr[i].substring(26,27);
-                          if (el == cur) {
-                              snmpindex = el;
-                              if (arr[i].substring(28,29) == '1')
-                              {
-                                  temp = arr[i].split(': ');
-                                  psid = temp[1];
-                              }else if (arr[i].substring(28,29) == '2'){
-                                  temp = arr[i].split(': ');
-                                  psext = temp[1];
-                              }
-                          }else{
-                              result = result + '\r\n\
-                          {\r\n\
-                              "{#SNMPINDEX}":' + cur + ',\r\n\
-                              "{#PSID}": ' + psid + ',\r\n\
-                              "{#PSEXT}": ' + psext +'\r\n\
-                          },\r\n';
-                              cur = el;
-                              psid = arr[i].split(': ')[1];
-                              psext = '';
+                      Array.prototype.contains = function(obj) {
+                      var i = this.length;
+                      while (i--) {
+                          if (this[i] === obj) {
+                              return true;
                           }
                       }
-                      result = result + '\r\n\
-                          {\r\n\
-                              "{#SNMPINDEX}":' + cur + ',\r\n\
-                              "{#PSID}": ' + psid + ',\r\n\
-                              "{#PSEXT}": ' + psid +'\r\n\
-                          }\r\n]';
+                      return false;
+                      }
+                      var arr = value.split("\n");
+                      var snmp_id = [];
+                      var data_id = {};
+                      var data_name = {};
+                      var result = "[\r\n";
+                      for (var i = 0; i < arr.length; i++)
+                      {
+                          var test = arr[i].split(': ');
+                          var value = test[1];
+                          test = test[0].split(' = ');
+                          var oid_data = test[0].split('.');
+                          if (!snmp_id.contains(oid_data[oid_data.length - 2]))
+                          {
+                              snmp_id.push(oid_data[oid_data.length - 2])
+                          }
+                          if (oid_data[oid_data.length -1] == '1')
+                          {
+                              data_id[oid_data[oid_data.length - 2]] = value;
+                          }
+                          else if (oid_data[oid_data.length - 1] == '2')
+                          {
+                              data_name[oid_data[oid_data.length - 2]] = value;
+                          }
+                      }
+                      for (var i = 0; i < snmp_id.length; i++)
+                      {
+                          result = result + '    {\r\n        "{#SNMPINDEX}": "' + snmp_id[i] + '",\r\n';
+                          result = result + '        "{#DATAID}": "' + data_id[snmp_id[i]] + '",\r\n';
+                          result = result + '        "{#DATANAME}": ' + data_name[snmp_id[i]] + '\r\n    }';
+                          if (i == snmp_id.length - 1)
+                          {
+                              result = result + '\r\n';
+                          }
+                          else
+                          {
+                              result = result + ',\r\n';
+                          }
+                      }
+                      result = result + ']';
                       return (result);
           item_prototypes:
             -
-              uuid: 381545dbc1034dc0babbdf1cfcdcfa5a
-              name: 'switchvoxPhoneStatus {#PSID}({#PSEXT}): svoxPhoneStatusId'
-              type: SNMP_AGENT
-              snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.1'
-              key: 'switchvoxPhoneStatus[svoxPhoneStatusId.{#PSID}]'
-              delay: 1h
-              value_type: FLOAT
-              trends: '0'
-              description: |
-                    MIB: SWITCHVOX-MIB
-                    The SIP Phone Provider ID
-            -
-              uuid: f566941321414b3080c02feb26b27e64
-              name: 'switchvoxPhoneStatus {#PSID}({#PSEXT}): svoxPhoneStatusExtension'
-              type: SNMP_AGENT
-              snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.2'
-              key: 'switchvoxPhoneStatus[svoxPhoneStatusExtension.{#PSID}]'
-              delay: 1h
-              value_type: TEXT
-              description: |
-                    MIB: SWITCHVOX-MIB
-                    The SIP Phone Extension
-            -
-              uuid: 3a95dfcd66a2439287e2745772366904
-              name: 'switchvoxPhoneStatus {#PSID}({#PSEXT}): svoxPhoneStatusCallerId'
-              type: SNMP_AGENT
-              snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.3'
-              key: 'switchvoxPhoneStatus[svoxPhoneStatusCallerId.{#PSID}]'
-              delay: 1h
-              value_type: TEXT
-              description: |
-                    MIB: SWITCHVOX-MIB
-                    The SIP Phone Caller ID
-            -
-              uuid: 6d728dd159c348259847f35048f3f309
-              name: 'switchvoxPhoneStatus {#PSID}({#PSEXT}): svoxPhoneStatusUserAgent'
-              type: SNMP_AGENT
-              snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.4'
-              key: 'switchvoxPhoneStatus[svoxPhoneStatusUserAgent.{#PSID}]'
-              delay: 1h
-              value_type: TEXT
-              description: |
-                    MIB: SWITCHVOX-MIB
-                    The SIP Phone User Agent
-            -
-              uuid: a7893ac967374348850fff5166b0f83f
-              name: 'switchvoxPhoneStatus {#PSID}({#PSEXT}): svoxPhoneStatusIpAddress'
-              type: SNMP_AGENT
-              snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.5'
-              key: 'switchvoxPhoneStatus[svoxPhoneStatusIpAddress.{#PSID}]'
-              delay: 1h
-              value_type: TEXT
-              description: |
-                    MIB: SWITCHVOX-MIB
-                    The SIP Phone IP Address
-            -
               uuid: 6ebbd14434094646a59c89414b0d8e6c
-              name: 'switchvoxPhoneStatus {#PSID}({#PSEXT}): svoxPhoneStatusState'
+              name: 'switchvoxPhoneStatus {#DATAID}({#DATANAME}): svoxPhoneStatusState'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.6'
-              key: 'switchvoxPhoneStatus[svoxPhoneStatusState.{#PSID}]'
+              key: 'switchvoxPhoneStatus[svoxPhoneStatusState.{#SNMPINDEX}.{#DATAID}]'
               delay: 1h
               value_type: TEXT
               description: |

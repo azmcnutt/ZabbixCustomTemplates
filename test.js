@@ -22,42 +22,52 @@ var value = '.1.3.6.1.4.1.22736.10.2.3.1.1 = INTEGER: 103\n\
 .1.3.6.1.4.1.22736.10.2.3.3.6 = INTEGER: 0\n\
 .1.3.6.1.4.1.22736.10.2.3.3.7 = STRING: "1.424"\n\
 .1.3.6.1.4.1.22736.10.2.3.3.8 = STRING: "ok"';
+Array.prototype.contains = function(obj) {
+    var i = this.length;
+    while (i--) {
+        if (this[i] === obj) {
+            return true;
+        }
+    }
+    return false;
+}
 var arr = value.split("\n");
-var result = "";
-var cur = 1;
-var snmpindex = '';
-var vpid = '';
-var vpname = '';
-result = "[";
+var snmp_id = [];
+var data_id = {};
+var data_name = {};
+var result = "[\r\n";
 for (var i = 0; i < arr.length; i++)
 {
-    var el = arr[i].substring(26,27);
-    if (el == cur) {
-        snmpindex = el;
-        if (arr[i].substring(28,29) == '1')
-        {
-            temp = arr[i].split(': ');
-            vpid = temp[1];
-        }else if (arr[i].substring(28,29) == '3'){
-            temp = arr[i].split(': ');
-            vpname = temp[1];
-        }
-    }else{
-        result = result + '\r\n\
-    {\r\n\
-        "{#SNMPINDEX}":' + cur + ',\r\n\
-        "{#VPID}": ' + vpid + ',\r\n\
-        "{#VPNAME}": ' + vpname +'\r\n\
-    },\r\n';
-        cur = el;
-        vpid = arr[i].split(': ')[1];
-        vpname = '';
+    var test = arr[i].split(': ');
+    var value = test[1];
+    test = test[0].split(' = ');
+    var oid_data = test[0].split('.');
+    if (!snmp_id.contains(oid_data[oid_data.length - 2]))
+    {
+        snmp_id.push(oid_data[oid_data.length - 2])
+    }
+    if (oid_data[oid_data.length -1] == '1')
+    {
+        data_id[oid_data[oid_data.length - 2]] = value;
+    }
+    else if (oid_data[oid_data.length - 1] == '3')
+    {
+        data_name[oid_data[oid_data.length - 2]] = value;
     }
 }
-result = result + '\r\n\
-    {\r\n\
-        "{#SNMPINDEX}":' + cur + ',\r\n\
-        "{#VPID}": ' + vpid + ',\r\n\
-        "{#VPNAME}": ' + vpname +'\r\n\
-    }\r\n]';
+for (var i = 0; i < snmp_id.length; i++)
+{
+    result = result + '    {\r\n        "{#SNMPINDEX}": "' + snmp_id[i] + '",\r\n';
+    result = result + '        "{#DATAID}": "' + data_id[snmp_id[i]] + '",\r\n';
+    result = result + '        "{#DATANAME}": ' + data_name[snmp_id[i]] + '\r\n    }';
+    if (i == snmp_id.length - 1)
+    {
+        result = result + '\r\n';
+    }
+    else
+    {
+        result = result + ',\r\n';
+    }
+}
+result = result + ']';
 console.log(result);
