@@ -578,7 +578,7 @@ zabbix_export:
           delay: 1h
           history: 90d
           trends: '0'
-          value_type: FLOAT
+          value_type: TEXT
           description: |
                 MIB: SWITCHVOX-MIB
                 controller status
@@ -592,7 +592,7 @@ zabbix_export:
           delay: 1h
           history: 90d
           trends: '0'
-          value_type: FLOAT
+          value_type: TEXT
           description: |
                 MIB: SWITCHVOX-MIB
                 logical device status
@@ -606,7 +606,7 @@ zabbix_export:
           delay: 1h
           history: 90d
           trends: '0'
-          value_type: FLOAT
+          value_type: TEXT
           description: |
                 MIB: SWITCHVOX-MIB
                 device #0 status
@@ -620,7 +620,7 @@ zabbix_export:
           delay: 1h
           history: 90d
           trends: '0'
-          value_type: FLOAT
+          value_type: TEXT
           description: |
                 MIB: SWITCHVOX-MIB
                 device #1 status
@@ -634,7 +634,7 @@ zabbix_export:
           delay: 1h
           history: 90d
           trends: '0'
-          value_type: FLOAT
+          value_type: TEXT
           description: |
                 MIB: SWITCHVOX-MIB
                 device #2 status
@@ -648,7 +648,7 @@ zabbix_export:
           delay: 1h
           history: 90d
           trends: '0'
-          value_type: FLOAT
+          value_type: TEXT
           description: |
                 MIB: SWITCHVOX-MIB
                 device #3 status
@@ -919,7 +919,7 @@ zabbix_export:
                       return (result);
           item_prototypes:
             -
-              uuid: 6ebbd144340c56c06ac2795454497f1e538207a4da594646a59c89414b0d8e6c
+              uuid: 84d80c19fe0c4d19b35b3db950954622
               name: 'switchvoxHardwareChannels {#DATAID}({#DATANAME}): svoxHardwareChanAlarm'
               type: SNMP_AGENT
               snmp_oid: '.1.3.6.1.4.1.22736.10.6.3.{#SNMPINDEX}.6'
