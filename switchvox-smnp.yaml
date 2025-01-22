@@ -136,7 +136,7 @@ zabbix_export:
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.3.1.1
           key:	switchvoxHardwareStatus.svoxMemoryUsed
-          delay: 1h
+          delay: 1m
           history: 90d
           trends: '0'
           value_type: FLOAT
@@ -149,13 +149,27 @@ zabbix_export:
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.3.1.2
           key:	switchvoxHardwareStatus.svoxMemoryTotal
-          delay: 1h
+          delay: 1m
           history: 90d
           trends: '0'
           value_type: FLOAT
           description: |
                 MIB: SWITCHVOX-MIB
                 Memory Total
+        -
+          uuid: 2ddd4b231bb8493f889ea7ff9412438e
+          name:	'switchvoxHardwareStatus: svoxMemoryPercentage'
+          type: CALCULATED
+          params: 'round(100*last(//switchvoxHardwareStatus.svoxMemoryUsed)/last(//switchvoxHardwareStatus.svoxMemoryTotal),1)'
+          units: '%'
+          key:	switchvoxHardwareStatus.svoxMemoryPercentage
+          delay: 1m
+          history: 90d
+          trends: '0'
+          value_type: FLOAT
+          description: |
+                MIB: SWITCHVOX-MIB
+                Memory Percentage
         -
           uuid: 991fbfe175c94724b9bbdb18297cb05f
           name:	'switchvoxHardwareStatus: svoxSwapUsed'
@@ -240,13 +254,32 @@ zabbix_export:
           type: SNMP_AGENT
           snmp_oid: .1.3.6.1.4.1.22736.10.3.3.1
           key:	switchvoxHardwareStatus.svoxLoad
-          delay: 1h
+          delay: 1m
           history: 90d
           trends: '0'
-          value_type: TEXT
+          value_type: FLOAT
           description: |
                 MIB: SWITCHVOX-MIB
                 Details of the machines load
+          triggers:
+            - uuid: 7a7cdcf443fb4582b180e4099604efa1
+              expression: 'min(/Sangoma Switchvox by SNMP/switchvoxHardwareStatus.svoxLoad, 5m)>{$HARDWARE.LOAD.CRIT}'
+              name: 'switchvoxHardwareStatus: High CPU utilization'
+              event_name: 'switchvoxHardwareStatus: High CPU utilization (over {$HARDWARE.LOAD.CRIT}% for 5m)'
+              opdata: 'Current utilization: {ITEM.LASTVALUE1}'
+              priority: HIGH
+              description: 'The CPU utilization is too high. The system might be slow to respond.'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'max(/Sangoma Switchvox by SNMP/switchvoxHardwareStatus.svoxLoad, 5m)<{$HARDWARE.LOAD.CLEAR}'
+            - uuid: f102375eec894e42997200270cfd2fcd
+              expression: 'min(/Sangoma Switchvox by SNMP/switchvoxHardwareStatus.svoxLoad, 5m)>{$HARDWARE.LOAD.WARN}'
+              name: 'switchvoxHardwareStatus: High CPU utilization'
+              event_name: 'switchvoxHardwareStatus: High CPU utilization (over {$HARDWARE.LOAD.WARN}% for 5m)'
+              opdata: 'Current utilization: {ITEM.LASTVALUE1}'
+              priority: WARNING
+              description: 'The CPU utilization is too high. The system might be slow to respond.'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'max(/Sangoma Switchvox by SNMP/switchvoxHardwareStatus.svoxLoad, 5m)<{$HARDWARE.LOAD.CLEAR}'
         -
           uuid: e18beac6ffcc403e8d751e187eb66f10
           name:	'switchvoxPhoneStatus: svoxPhoneStatus'
@@ -929,3 +962,16 @@ zabbix_export:
               description: |
                     MIB: SWITCHVOX-MIB
                     Hardware Channel State
+      macros:
+        - macro: '{$HARDWARE.LOAD.CRIT}'
+          value: '7'
+        - macro: '{$HARDWARE.LOAD.WARN}'
+          value: '5'
+        - macro: '{$HARDWARE.LOAD.CLEAR}'
+          value: '4'
+        - macro: '{$MEMORY.UTIL.CRIT}'
+          value: '70'
+        - macro: '{$MEMORY.UTIL.WARN}'
+          value: '50'
+        - macro: '{$MEMORY.UTIL.CLEAR}'
+          value: '40'
