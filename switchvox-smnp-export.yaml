@@ -1,0 +1,1075 @@
+zabbix_export:
+  version: '7.2'
+  template_groups:
+    - uuid: 1d12408342854fd5a4436dd6d5d1bd4a
+      name: Templates/Telephony
+  templates:
+    - uuid: eb193a09b1cf45c080d95ad0caa4e730
+      template: 'Sangoma Switchvox by SNMP'
+      name: 'Sangoma Switchvox by SNMP'
+      description: |
+        ## Montioring of Switchvox by SNMP.
+        Switchvox is Digium's family of Voice Over IP Phone systems 
+        for small and medium businesses.'
+      groups:
+        - name: Templates/Telephony
+      items:
+        - uuid: 8619f767237c42fbacf8ddecffe71f04
+          name: 'switchvoxCurrentCalls: svoxAgentLoginCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.2
+          key: switchvoxCurrentCalls.svoxAgentLoginCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Active Login Calls
+            ::= { switchvoxCurrentCalls 2 }
+        - uuid: b75cd36cbb704ee484e9bcceb3fee831
+          name: 'switchvoxCurrentCalls: svoxAgentLogoutCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.3
+          key: switchvoxCurrentCalls.svoxAgentLogoutCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Active Logout Calls
+            ::= { switchvoxCurrentCalls 3 }
+        - uuid: 3f465bd1d98a47e18f1f54aa502f5fd2
+          name: 'switchvoxCurrentCalls: svoxCheckingVoicemailCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.4
+          key: switchvoxCurrentCalls.svoxCheckingVoicemailCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Checking Voicemail Calls
+            ::= { switchvoxCurrentCalls 4 }
+        - uuid: 9877aa736a2c42379f507e643abcc6e4
+          name: 'switchvoxCurrentCalls: svoxConferenceCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.5
+          key: switchvoxCurrentCalls.svoxConferenceCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Conference Calls
+            ::= { switchvoxCurrentCalls 5 }
+        - uuid: e1bad06a714442cb958853c8f60bc507
+          name: 'switchvoxCurrentCalls: svoxDirectoryCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.6
+          key: switchvoxCurrentCalls.svoxDirectoryCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Directory Calls
+            ::= { switchvoxCurrentCalls 6 }
+        - uuid: 01f799b528c64a45b8b74ad64790d775
+          name: 'switchvoxCurrentCalls: svoxFaxingCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.7
+          key: switchvoxCurrentCalls.svoxFaxingCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Faxing Calls
+            ::= { switchvoxCurrentCalls 7 }
+        - uuid: 50c4ed4345844895ac4f0b817e1fc8cf
+          name: 'switchvoxCurrentCalls: svoxIntercomCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.8
+          key: switchvoxCurrentCalls.svoxIntercomCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Intercom Calls
+            ::= { switchvoxCurrentCalls 8 }
+        - uuid: 0300f585dddb4c05b7dbd0f720c98e78
+          name: 'switchvoxCurrentCalls: svoxIVRCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.9
+          key: switchvoxCurrentCalls.svoxIVRCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            IVR Calls
+            ::= { switchvoxCurrentCalls 9 }
+        - uuid: b8ee9329bdc84965b3420db2245ad621
+          name: 'switchvoxCurrentCalls: svoxLeavingVoicemailCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.10
+          key: switchvoxCurrentCalls.svoxLeavingVoicemailCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Leaving Voicemail Calls
+            ::= { switchvoxCurrentCalls 10 }
+        - uuid: ec9f6af85488416588434c25e982c9f7
+          name: 'switchvoxCurrentCalls: svoxMonitoringCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.11
+          key: switchvoxCurrentCalls.svoxMonitoringCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Monitoring Calls
+            ::= { switchvoxCurrentCalls 11 }
+        - uuid: 4638aff783674a5e91b53963ed4fac73
+          name: 'switchvoxCurrentCalls: svoxParkedCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.12
+          key: switchvoxCurrentCalls.svoxParkedCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Parked Calls
+            ::= { switchvoxCurrentCalls 12 }
+        - uuid: 4d43cd5157384a88b0e47951d9e8cd6e
+          name: 'switchvoxCurrentCalls: svoxQueuedCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.13
+          key: switchvoxCurrentCalls.svoxQueuedCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Queued Calls
+            ::= { switchvoxCurrentCalls 13 }
+        - uuid: a341359c3ffa414c97d277791bd7e341
+          name: 'switchvoxCurrentCalls: svoxReceivingFaxCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.14
+          key: switchvoxCurrentCalls.svoxReceivingFaxCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Receiving Fax Calls
+            ::= { switchvoxCurrentCalls 14 }
+        - uuid: 2e0932c1468b4a69b936c51115d50160
+          name: 'switchvoxCurrentCalls: svoxRingingCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.15
+          key: switchvoxCurrentCalls.svoxRingingCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Ringing Calls
+            ::= { switchvoxCurrentCalls 15 }
+        - uuid: 30158ccdfb3f42f5aebcd0519c8c9348
+          name: 'switchvoxCurrentCalls: svoxTalkingCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.15
+          key: switchvoxCurrentCalls.svoxTalkingCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Talking Calls
+            ::= { switchvoxCurrentCalls 15 }
+        - uuid: c963c6c48a614e1b8b156d45609bd280
+          name: 'switchvoxCurrentCalls: svoxTotalCurrentCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.1
+          key: switchvoxCurrentCalls.svoxTotalCurrentCalls
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Total active current calls
+            ::= { switchvoxCurrentCalls 1 }
+          triggers:
+            - uuid: f59bb7d430944d159d4ba907ce7fcc6b
+              expression: 'min(/Sangoma Switchvox by SNMP/switchvoxCurrentCalls.svoxTotalCurrentCalls, 5m)>{$INFO.CALLS.WARN}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'max(/Sangoma Switchvox by SNMP/switchvoxCurrentCalls.svoxTotalCurrentCalls, 5m)<{$INFO.CALLS.WARN}'
+              name: 'switchvoxCurrentCalls: svoxWarnTotalCurrentCalls'
+              event_name: 'switchvoxCurrentCalls: svoxWarnTotalCurrentCalls (over {$INFO.CALLS.WARN} for 5m)'
+              opdata: 'Current calls: {ITEM.LASTVALUE1}'
+              priority: WARNING
+              description: 'Current total calls in excess {$INFO.NUMEXT.WARN}% for over 5m'
+              manual_close: 'YES'
+        - uuid: 24d0d43e724e43c497b91bb24b0a04c5
+          name: 'switchvoxCurrentCalls: svoxUnknownCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.5.16
+          key: switchvoxCurrentCalls.svoxUnknownCalls
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Unknown Calls
+            ::= { switchvoxCurrentCalls 16 }
+        - uuid: 82b85a40f0bc42df84bf74279f2b8e48
+          name: 'switchvoxHardwareChannels: svoxAvailableHardwareChannels'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.6.2
+          key: switchvoxHardwareChannels.svoxAvailableHardwareChannels
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Current number of active and available hardware channels
+            ::= { switchvoxHardwareChannels 2 }
+        - uuid: 9a8ccc3f06d4488f846dc67b12de0d03
+          name: 'switchvoxHardwareChannels: svoxHardwareChannels'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.6.1
+          key: switchvoxHardwareChannels.svoxHardwareChannels
+          delay: 5m
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Current number of active hardware channels
+            ::= { switchvoxHardwareChannels 1 }
+        - uuid: 8253648fa56149b18212a351b9cc48bd
+          name: 'switchvoxHardwareStatus: svoxDiskInfoLastUpdate'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.2.3
+          key: switchvoxHardwareStatus.svoxDiskInfoLastUpdate
+          delay: 1h
+          history: 90d
+          value_type: TEXT
+          description: |
+            MIB: SWITCHVOX-MIB
+            Disk Info Last Updated
+        - uuid: 246b8560694349cb88c44c8da05ea871
+          name: 'switchvoxHardwareStatus: svoxDiskTotal'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.2.2
+          key: switchvoxHardwareStatus.svoxDiskTotal
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Disk Total
+        - uuid: 4e91183a6bc14571837d96a132a1a4cb
+          name: 'switchvoxHardwareStatus: svoxDiskUsed'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.2.1
+          key: switchvoxHardwareStatus.svoxDiskUsed
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Disk Used
+        - uuid: f346b6849b9c417a94d0457f2ecb62f2
+          name: 'switchvoxHardwareStatus: svoxLoad'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.3.1
+          key: switchvoxHardwareStatus.svoxLoad
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Details of the machines load
+          triggers:
+            - uuid: 7a7cdcf443fb4582b180e4099604efa1
+              expression: 'min(/Sangoma Switchvox by SNMP/switchvoxHardwareStatus.svoxLoad, 5m)>{$HARDWARE.LOAD.CRIT}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'max(/Sangoma Switchvox by SNMP/switchvoxHardwareStatus.svoxLoad, 5m)<{$HARDWARE.LOAD.CLEAR}'
+              name: 'switchvoxHardwareStatus: High CPU utilization'
+              event_name: 'switchvoxHardwareStatus: High CPU utilization (over {$HARDWARE.LOAD.CRIT}% for 5m)'
+              opdata: 'Current utilization: {ITEM.LASTVALUE1}'
+              priority: HIGH
+              description: 'The CPU utilization is too high. The system might be slow to respond.'
+              manual_close: 'YES'
+            - uuid: f102375eec894e42997200270cfd2fcd
+              expression: 'min(/Sangoma Switchvox by SNMP/switchvoxHardwareStatus.svoxLoad, 5m)>{$HARDWARE.LOAD.WARN}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'max(/Sangoma Switchvox by SNMP/switchvoxHardwareStatus.svoxLoad, 5m)<{$HARDWARE.LOAD.CLEAR}'
+              name: 'switchvoxHardwareStatus: High CPU utilization'
+              event_name: 'switchvoxHardwareStatus: High CPU utilization (over {$HARDWARE.LOAD.WARN}% for 5m)'
+              opdata: 'Current utilization: {ITEM.LASTVALUE1}'
+              priority: WARNING
+              description: 'The CPU utilization is too high. The system might be slow to respond.'
+              manual_close: 'YES'
+        - uuid: 2fe820edae664e6db222b38914e58713
+          name: 'switchvoxHardwareStatus: svoxMemoryInfoLastUpdate'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.1.5
+          key: switchvoxHardwareStatus.svoxMemoryInfoLastUpdate
+          delay: 1h
+          history: 90d
+          value_type: TEXT
+          description: |
+            MIB: SWITCHVOX-MIB
+            Memory Info Last Updated
+        - uuid: 2ddd4b231bb8493f889ea7ff9412438e
+          name: 'switchvoxHardwareStatus: svoxMemoryPercentage'
+          type: CALCULATED
+          key: switchvoxHardwareStatus.svoxMemoryPercentage
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          units: '%'
+          params: 'round(100*last(//switchvoxHardwareStatus.svoxMemoryUsed)/last(//switchvoxHardwareStatus.svoxMemoryTotal),1)'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Memory Percentage
+          triggers:
+            - uuid: 36d265bae493482f9bee3202aad1ea01
+              expression: 'min(/Sangoma Switchvox by SNMP/switchvoxHardwareStatus.svoxMemoryPercentage, 5m)>{$MEMORY.UTIL.CRIT}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'max(/Sangoma Switchvox by SNMP/switchvoxHardwareStatus.svoxMemoryPercentage, 5m)<{$MEMORY.UTIL.CRIT}'
+              name: 'switchvoxHardwareStatus: High Memory utilization'
+              event_name: 'switchvoxHardwareStatus: High MEMORY utilization (over {$MEMORY.UTIL.CRIT}% for 5m)'
+              opdata: 'Current utilization: {ITEM.LASTVALUE1}'
+              priority: HIGH
+              description: 'The Memory utilization is too high.'
+            - uuid: e1a33da96c964721ad25891a0e05ad15
+              expression: 'min(/Sangoma Switchvox by SNMP/switchvoxHardwareStatus.svoxMemoryPercentage, 5m)>{$MEMORY.UTIL.WARN}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'max(/Sangoma Switchvox by SNMP/switchvoxHardwareStatus.svoxMemoryPercentage, 5m)<{$MEMORY.UTIL.WARN}'
+              name: 'switchvoxHardwareStatus: High Memory utilization'
+              event_name: 'switchvoxHardwareStatus: High MEMORY utilization (over {$MEMORY.UTIL.WARN}% for 5m)'
+              opdata: 'Current utilization: {ITEM.LASTVALUE1}'
+              priority: WARNING
+              description: 'The Memory utilization is too high.'
+              manual_close: 'YES'
+        - uuid: 9496914d063047b5a3bff526cb986bba
+          name: 'switchvoxHardwareStatus: svoxMemoryTotal'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.1.2
+          key: switchvoxHardwareStatus.svoxMemoryTotal
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Memory Total
+        - uuid: 3f335c120ff4410e8bc14273b67ebf3e
+          name: 'switchvoxHardwareStatus: svoxMemoryUsed'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.1.1
+          key: switchvoxHardwareStatus.svoxMemoryUsed
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Memory Used
+        - uuid: eddd82160e944ddc87f339dde83209ad
+          name: 'switchvoxHardwareStatus: svoxSwapTotal'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.1.4
+          key: switchvoxHardwareStatus.svoxSwapTotal
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Swap Total
+        - uuid: 991fbfe175c94724b9bbdb18297cb05f
+          name: 'switchvoxHardwareStatus: svoxSwapUsed'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.3.1.3
+          key: switchvoxHardwareStatus.svoxSwapUsed
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Swap Used
+        - uuid: d190aaa2332d494ebb3dc902fe5628d9
+          name: 'switchvoxInfo: svoxPercentPhoneConfigFeaturePacks'
+          type: CALCULATED
+          key: switchvoxInfo.PercentPhoneConfigFeaturePacks
+          delay: 1h
+          units: '%'
+          params: 'round(100*last(//switchvoxInfo.svoxMaxConcurrentCalls)/last(//switchvoxInfo.svoxUsedPhoneConfigFeaturePacks),1)'
+          triggers:
+            - uuid: 5b54a6ff36654893b24d5de789f13a08
+              expression: 'last(/Sangoma Switchvox by SNMP/switchvoxInfo.PercentPhoneConfigFeaturePacks)>{$INFO.FEATPK.WARN}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Sangoma Switchvox by SNMP/switchvoxInfo.PercentPhoneConfigFeaturePacks)<{$INFO.FEATPK.WARN}'
+              name: 'switchvoxInfo: High Feat Pack utilization'
+              event_name: 'switchvoxInfo: High Feat Pack utilization (over {$INFO.FEATPK.WARN})'
+              opdata: 'Current utilization: {ITEM.LASTVALUE1}'
+              priority: WARNING
+              description: 'Feature packs in use is within {$INFO.FEATPK.WARN}% of available Feature Packs'
+              manual_close: 'YES'
+        - uuid: 0ebb2847ad584dda8598beea2d7d68af
+          name: 'switchvoxInfo: svoxMaxConcurrentCalls'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.1.2
+          key: switchvoxInfo.svoxMaxConcurrentCalls
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Maximum concurrent calls
+            ::= { switchvoxInfo 2 }
+        - uuid: c28c6fd374044ff3b6b4a372ec7a190d
+          name: 'switchvoxInfo: svoxMaxExtensions'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.1.6
+          key: switchvoxInfo.svoxMaxExtensions
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Maximum extensions
+            ::= { switchvoxInfo 6 }
+        - uuid: 285fdc918a1f4391b9c711dea858c52f
+          name: 'switchvoxInfo: svoxMaxPhoneConfigFeaturePacks'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.1.4
+          key: switchvoxInfo.svoxMaxPhoneConfigFeaturePacks
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Maximum phone configuration feature packs
+            ::= { switchvoxInfo 4 }
+        - uuid: 641d62b8fbc844ffbfa68091fbd25e36
+          name: 'switchvoxInfo: svoxPercentExtensions'
+          type: CALCULATED
+          key: switchvoxInfo.svoxPercentExtensions
+          delay: 1h
+          units: '%'
+          params: 'round(100*last(//switchvoxInfo.svoxUsedExtensions)/last(//switchvoxInfo.svoxMaxExtensions),1)'
+          triggers:
+            - uuid: 2a21ce0e45914b1f8f1abd81074f4830
+              expression: 'last(/Sangoma Switchvox by SNMP/switchvoxInfo.svoxPercentExtensions)>{$INFO.NUMEXT.WARN}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Sangoma Switchvox by SNMP/switchvoxInfo.svoxPercentExtensions)<{$INFO.NUMEXT.WARN}'
+              name: 'switchvoxInfo: High Extension utilization'
+              event_name: 'switchvoxInfo: High Extension utilization (over {$INFO.NUMEXT.WARN})'
+              opdata: 'Current utilization: {ITEM.LASTVALUE1}'
+              priority: WARNING
+              description: 'Extensions in use is within {$INFO.NUMEXT.WARN}% of available Extension'
+              manual_close: 'YES'
+        - uuid: ec0372eebffb4a6caa953dfed1cae318
+          name: 'switchvoxInfo: svoxSoftwareVersion'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.1.1
+          key: switchvoxInfo.svoxSoftwareVersion
+          delay: 1h
+          history: 90d
+          value_type: CHAR
+          description: |
+            MIB: SWITCHVOX-MIB
+            Software version
+            ::= { switchvoxInfo 1 }
+          triggers:
+            - uuid: 797048e31c3148a68b320bba64361f87
+              expression: 'last(/Sangoma Switchvox by SNMP/switchvoxInfo.svoxSoftwareVersion,#1)<>last(/Sangoma Switchvox by SNMP/switchvoxInfo.svoxSoftwareVersion,#2) and length(last(/Sangoma Switchvox by SNMP/switchvoxInfo.svoxSoftwareVersion))>0'
+              recovery_mode: NONE
+              name: 'switchvoxInfo: svoxSoftwareVersionChange'
+              event_name: 'switchvoxInfo: svoxSoftwareVersionChange'
+              opdata: 'Current value: {ITEM.LASTVALUE1}'
+              priority: INFO
+              description: 'Switchvox version has changed. Acknowledge to close the problem manually.'
+              manual_close: 'YES'
+        - uuid: 648fa7bff77d49eca703e374408d8750
+          name: 'switchvoxInfo: svoxUsedExtensions'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.1.5
+          key: switchvoxInfo.svoxUsedExtensions
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Used extensions
+            ::= { switchvoxInfo 5 }
+        - uuid: d7bdf8aad73d47adaa0cbb49516fc6bf
+          name: 'switchvoxInfo: svoxUsedPhoneConfigFeaturePacks'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.1.3
+          key: switchvoxInfo.svoxUsedPhoneConfigFeaturePacks
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Used phone configuration feature packs
+            ::= { switchvoxInfo 3 }
+        - uuid: 7642b231a48948b5a9b721f2fbc3bdb7
+          name: 'switchvoxPhoneStatus: svoxAvailablePhoneStatus'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.4.2
+          key: switchvoxPhoneStatus.svoxAvailablePhoneStatus
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Current number of provisioned and available phones
+            ::= { switchvoxPhoneStatus 2 }
+        - uuid: 2f18cc9329a4412c9d45391e390387df
+          name: 'switchvoxPhoneStatus: svoxPercentPhoneStatus'
+          type: CALCULATED
+          key: switchvoxPhoneStatus.svoxPercentPhoneStatus
+          delay: 1h
+          units: '%'
+          params: 'round(100*last(//switchvoxPhoneStatus.svoxAvailablePhoneStatus)/last(//switchvoxPhoneStatus.svoxPhoneStatus),1)'
+          triggers:
+            - uuid: 5ac4f2fe29d84969b03338a2d809facf
+              expression: 'last(/Sangoma Switchvox by SNMP/switchvoxPhoneStatus.svoxPercentPhoneStatus)>{$PHONE.STATUS.WARN}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Sangoma Switchvox by SNMP/switchvoxPhoneStatus.svoxPercentPhoneStatus)<{$PHONE.STATUS.WARN}'
+              name: 'switchvoxPhoneStatus: High Percent Phones Unavailable'
+              event_name: 'switchvoxPhoneStatus: High Percent Phones Unavailable (over {$PHONE.STATUS.WARN})%'
+              opdata: 'Phones Unavailable: {ITEM.LASTVALUE1}%'
+              priority: WARNING
+              description: 'Phones unavailable in greater than {$PHONE.STATUS.WARN}%'
+              manual_close: 'YES'
+        - uuid: e18beac6ffcc403e8d751e187eb66f10
+          name: 'switchvoxPhoneStatus: svoxPhoneStatus'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.4.1
+          key: switchvoxPhoneStatus.svoxPhoneStatus
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Current number of provisioned phones
+            ::= { switchvoxPhoneStatus 1 }
+        - uuid: 727ea43969aa4d25a3bbac50430ee2d0
+          name: 'switchvoxRaid: svoxRaidControllerStatus'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.8.1
+          key: switchvoxRaid.svoxRaidControllerStatus
+          delay: 1h
+          history: 90d
+          value_type: TEXT
+          description: |
+            MIB: SWITCHVOX-MIB
+            controller status
+            ::= { switchvoxRaid 1 }
+        - uuid: 6d3fb83cdf574541a5c2e36fd1aa177d
+          name: 'switchvoxRaid: svoxRaidDeviceOneStatus'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.8.4
+          key: switchvoxRaid.svoxRaidDeviceOneStatus
+          delay: 1h
+          history: 90d
+          value_type: TEXT
+          description: |
+            MIB: SWITCHVOX-MIB
+            device #1 status
+            ::= { switchvoxRaid 4 }
+        - uuid: 9f38990fec8b42738b69b39f0c152748
+          name: 'switchvoxRaid: svoxRaidDeviceThreeStatus'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.8.6
+          key: switchvoxRaid.svoxRaidDeviceThreeStatus
+          delay: 1h
+          history: 90d
+          value_type: TEXT
+          description: |
+            MIB: SWITCHVOX-MIB
+            device #3 status
+            ::= { switchvoxRaid 6 }
+        - uuid: c09ada6d7c7c49ae9b5d6deacf25c487
+          name: 'switchvoxRaid: svoxRaidDeviceTwoStatus'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.8.5
+          key: switchvoxRaid.svoxRaidDeviceTwoStatus
+          delay: 1h
+          history: 90d
+          value_type: TEXT
+          description: |
+            MIB: SWITCHVOX-MIB
+            device #2 status
+            ::= { switchvoxRaid 5 }
+        - uuid: d76e6ca108cc40df8fa0116af89e1d37
+          name: 'switchvoxRaid: svoxRaidDeviceZeroStatus'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.8.3
+          key: switchvoxRaid.svoxRaidDeviceZeroStatus
+          delay: 1h
+          history: 90d
+          value_type: TEXT
+          description: |
+            MIB: SWITCHVOX-MIB
+            device #0 status
+            ::= { switchvoxRaid 3 }
+        - uuid: d12d354731c54d7da81538a58c5591ce
+          name: 'switchvoxRaid: svoxRaidLogicalDeviceStatus'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.8.2
+          key: switchvoxRaid.svoxRaidLogicalDeviceStatus
+          delay: 1h
+          history: 90d
+          value_type: TEXT
+          description: |
+            MIB: SWITCHVOX-MIB
+            logical device status
+            ::= { switchvoxRaid 2 }
+        - uuid: 12639c1f993c47cabfb2b96d80197786
+          name: 'switchvoxSubscriptionDate: svoxSubDaysLeft'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.7.2
+          key: switchvoxSubscriptionDate.svoxSubDaysLeft
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Days left in subscription
+            ::= { switchvoxSubscriptionDate 2 }
+          triggers:
+            - uuid: 594788f6d37846a98787689d5fbe0e45
+              expression: 'last(/Sangoma Switchvox by SNMP/switchvoxSubscriptionDate.svoxSubDaysLeft)<{$SUB.DAYSLEFT.CRIT}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Sangoma Switchvox by SNMP/switchvoxSubscriptionDate.svoxSubDaysLeft)>{$SUB.DAYSLEFT.CRIT}'
+              name: 'switchvoxSubscriptionDate: svoxCritSubDaysLeft'
+              event_name: 'switchvoxSubscriptionDate: svoxWarnSubDaysLeft'
+              opdata: 'Subscription Days Left: {ITEM.LASTVALUE1}'
+              priority: HIGH
+              description: 'Subscription will expire in less than {$INFO.NUMEXT.CRIT} days'
+              manual_close: 'YES'
+            - uuid: 3dc52a4729744caa9a9be90f9107a706
+              expression: 'last(/Sangoma Switchvox by SNMP/switchvoxSubscriptionDate.svoxSubDaysLeft)<{$SUB.DAYSLEFT.WARN}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Sangoma Switchvox by SNMP/switchvoxSubscriptionDate.svoxSubDaysLeft)>{$SUB.DAYSLEFT.WARN}'
+              name: 'switchvoxSubscriptionDate: svoxWarnSubDaysLeft'
+              event_name: 'switchvoxSubscriptionDate: svoxWarnSubDaysLeft'
+              opdata: 'Subscription Days Left: {ITEM.LASTVALUE1}'
+              priority: WARNING
+              description: 'Subscription will expire in less than {$INFO.NUMEXT.WARN} days'
+              manual_close: 'YES'
+        - uuid: 4b4ec4e8bb39488e8b9384819b042adc
+          name: 'switchvoxSubscriptionDate: svoxSubExpireDate'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.7.1
+          key: switchvoxSubscriptionDate.svoxSubExpireDate
+          delay: 1h
+          history: 90d
+          value_type: TEXT
+          description: |
+            MIB: SWITCHVOX-MIB
+            Subscription expiration date
+            ::= { switchvoxSubscriptionDate 1 }
+        - uuid: e79bfcf96b764ff88627a38e05d6923a
+          name: 'switchvoxVoipProviders: svoxAvailableVoipProviders'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.2.2
+          key: switchvoxVoipProviders.svoxAvailableVoipProviders
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Current number of active and available voip providers
+            ::= { switchvoxVoipProviders 2 }
+        - uuid: eb7b4a79aaa64a5b9527935f0ceb6812
+          name: 'switchvoxVoipProviders: svoxPercentVoipProviderStatus'
+          type: CALCULATED
+          key: switchvoxVoipProviders.svoxPercentVoipProviderStatus
+          delay: 1h
+          units: '%'
+          params: 'round(100*last(//switchvoxVoipProviders.svoxAvailableVoipProviders)/last(//switchvoxVoipProviders.svoxVoipProviders),1)'
+          triggers:
+            - uuid: 692cd3aa8e784ae68f316c7a5f2a2ca6
+              expression: 'last(/Sangoma Switchvox by SNMP/switchvoxVoipProviders.svoxPercentVoipProviderStatus)>{$PHONE.STATUS.WARN}'
+              recovery_mode: RECOVERY_EXPRESSION
+              recovery_expression: 'last(/Sangoma Switchvox by SNMP/switchvoxVoipProviders.svoxPercentVoipProviderStatus)<{$PHONE.STATUS.WARN}'
+              name: 'switchvoxVoipProviders: High Percent VOIP Providers Unavailable'
+              event_name: 'switchvoxVoipProviders: High Percent VOIP Providers Unavailable (over {$VOIP.STATUS.WARN})%'
+              opdata: 'Providers Unavailable: {ITEM.LASTVALUE1}%'
+              priority: WARNING
+              description: 'VOIP Providers unavailable in greater than {$PHONE.STATUS.WARN}%'
+              manual_close: 'YES'
+        - uuid: b9dcea2d4f354b3795c6f05f6a51803a
+          name: 'switchvoxVoipProviders: svoxVoipProviders'
+          type: SNMP_AGENT
+          snmp_oid: .1.3.6.1.4.1.22736.10.2.1
+          key: switchvoxVoipProviders.svoxVoipProviders
+          delay: 1h
+          history: 90d
+          value_type: FLOAT
+          trends: '0'
+          description: |
+            MIB: SWITCHVOX-MIB
+            Current number of active voip providers
+            ::= { switchvoxVoipProviders 1 }
+      discovery_rules:
+        - uuid: bcce8f7a0065493eb90099519bde0ce2
+          name: switchvoxHardwareChannels.discovery
+          type: SNMP_AGENT
+          snmp_oid: 'walk[.1.3.6.1.4.1.22736.10.6.3]'
+          key: switchvoxHardwareChannels.discovery
+          delay: 1h
+          description: |
+            MIB: SWITCHVOX-MIB
+            Table with details of the provisioned phones.
+            ::= { switchvoxHardwareChannels 3 }
+            SvoxHardwareChanEntry ::= SEQUENCE {
+              svoxHardwareChanId		DisplayString,
+              svoxHardwareChanName	  	DisplayString,
+              svoxHardwareChanChannel 	Integer32,
+              svoxHardwareChanGroupName     DisplayString,
+              svoxHardwareChanSignalling    DisplayString,
+                svoxHardwareChanAlarm	  	DisplayString
+            }
+          item_prototypes:
+            - uuid: 84d80c19fe0c4d19b35b3db950954622
+              name: 'switchvoxHardwareChannels {#DATAID}({#DATANAME}): svoxHardwareChanAlarm'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.22736.10.6.3.{#SNMPINDEX}.6'
+              key: 'switchvoxHardwareChannels[svoxHardwareChanAlarm.{#DATAID}]'
+              delay: 1h
+              value_type: TEXT
+              description: |
+                MIB: SWITCHVOX-MIB
+                Hardware Channel State
+              trigger_prototypes:
+                - uuid: fff11526779f44f091027a6ea5827485
+                  expression: 'last(/Sangoma Switchvox by SNMP/switchvoxHardwareChannels[svoxHardwareChanAlarm.{#DATAID}])<>"OK"'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Sangoma Switchvox by SNMP/switchvoxHardwareChannels[svoxHardwareChanAlarm.{#DATAID}])="OK"'
+                  name: 'switchvoxHardwareChannels[svoxHardwareChanAlarmActive.{#DATAID}]'
+                  event_name: 'switchvoxHardwareChannels[svoxHardwareChanAlarmActive.{#DATAID}]'
+                  opdata: 'switchvoxHardwareChannels[svoxHardwareChanAlarm.{#DATAID}]: {ITEM.LASTVALUE1}'
+                  priority: HIGH
+                  description: 'Hardware Channel down'
+                  manual_close: 'YES'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  Array.prototype.contains = function(obj) {
+                  var i = this.length;
+                  while (i--) {
+                      if (this[i] === obj) {
+                          return true;
+                      }
+                  }
+                  return false;
+                  }
+                  var arr = value.split("\n");
+                  var snmp_id = [];
+                  var data_id = {};
+                  var data_name = {};
+                  var result = "[\r\n";
+                  for (var i = 0; i < arr.length; i++)
+                  {
+                      var test = arr[i].split(': ');
+                      var value = test[1];
+                      test = test[0].split(' = ');
+                      var oid_data = test[0].split('.');
+                      if (!snmp_id.contains(oid_data[oid_data.length - 2]))
+                      {
+                          snmp_id.push(oid_data[oid_data.length - 2])
+                      }
+                      if (oid_data[oid_data.length -1] == '1')
+                      {
+                          data_id[oid_data[oid_data.length - 2]] = value;
+                      }
+                      else if (oid_data[oid_data.length - 1] == '2')
+                      {
+                          data_name[oid_data[oid_data.length - 2]] = value;
+                      }
+                  }
+                  for (var i = 0; i < snmp_id.length; i++)
+                  {
+                      result = result + '    {\r\n        "{#SNMPINDEX}": "' + snmp_id[i] + '",\r\n';
+                      result = result + '        "{#DATAID}": "' + data_id[snmp_id[i]] + '",\r\n';
+                      result = result + '        "{#DATANAME}": ' + data_name[snmp_id[i]] + '\r\n    }';
+                      if (i == snmp_id.length - 1)
+                      {
+                          result = result + '\r\n';
+                      }
+                      else
+                      {
+                          result = result + ',\r\n';
+                      }
+                  }
+                  result = result + ']';
+                  return (result);
+        - uuid: 3e1d8907101246faa13cbed0e21c397d
+          name: switchvoxPhoneStatus.discovery
+          type: SNMP_AGENT
+          snmp_oid: 'walk[.1.3.6.1.4.1.22736.10.4.3]'
+          key: switchvoxPhoneStatus.discovery
+          delay: 1h
+          description: |
+            MIB: SWITCHVOX-MIB
+            Table with details of the provisioned phones.
+            ::= { switchvoxPhoneStatus 3 }
+            SvoxPhoneStatusEntry ::= SEQUENCE {
+              svoxPhoneStatusId		Integer32,
+              svoxPhoneStatusExtension	Integer32,
+              svoxPhoneStatusCallerId	DisplayString,
+              svoxPhoneStatusUserAgent      DisplayString,
+              svoxPhoneStatusIpAddress    	DisplayString,
+              svoxPhoneStatusState	  	DisplayString
+            }
+          item_prototypes:
+            - uuid: 6ebbd14434094646a59c89414b0d8e6c
+              name: 'switchvoxPhoneStatus {#DATAID}({#DATANAME}): svoxPhoneStatusState'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.22736.10.4.3.{#SNMPINDEX}.6'
+              key: 'switchvoxPhoneStatus[svoxPhoneStatusState.{#SNMPINDEX}.{#DATAID}]'
+              delay: 1h
+              value_type: TEXT
+              description: |
+                MIB: SWITCHVOX-MIB
+                The SIP Phone Status
+              trigger_prototypes:
+                - uuid: 6eb6665b91184f17bc47f960a1562b38
+                  expression: 'last(/Sangoma Switchvox by SNMP/switchvoxPhoneStatus[svoxPhoneStatusState.{#SNMPINDEX}.{#DATAID}])="unreachable"'
+                  recovery_mode: RECOVERY_EXPRESSION
+                  recovery_expression: 'last(/Sangoma Switchvox by SNMP/switchvoxPhoneStatus[svoxPhoneStatusState.{#SNMPINDEX}.{#DATAID}])<>"unreachable"'
+                  name: 'switchvoxPhoneStatus[svoxPhoneStatusUnreachable.{#SNMPINDEX}.{#DATAID}])'
+                  event_name: 'switchvoxPhoneStatus[svoxPhoneStatusUnreachable.{#SNMPINDEX}.{#DATAID}])'
+                  opdata: 'switchvoxPhoneStatus[svoxPhoneStatusState.{#SNMPINDEX}.{#DATAID}]): {ITEM.LASTVALUE1}'
+                  priority: WARNING
+                  description: 'Phone Down'
+                  manual_close: 'YES'
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  Array.prototype.contains = function(obj) {
+                  var i = this.length;
+                  while (i--) {
+                      if (this[i] === obj) {
+                          return true;
+                      }
+                  }
+                  return false;
+                  }
+                  var arr = value.split("\n");
+                  var snmp_id = [];
+                  var data_id = {};
+                  var data_name = {};
+                  var result = "[\r\n";
+                  for (var i = 0; i < arr.length; i++)
+                  {
+                      var test = arr[i].split(': ');
+                      var value = test[1];
+                      test = test[0].split(' = ');
+                      var oid_data = test[0].split('.');
+                      if (!snmp_id.contains(oid_data[oid_data.length - 2]))
+                      {
+                          snmp_id.push(oid_data[oid_data.length - 2])
+                      }
+                      if (oid_data[oid_data.length -1] == '1')
+                      {
+                          data_id[oid_data[oid_data.length - 2]] = value;
+                      }
+                      else if (oid_data[oid_data.length - 1] == '2')
+                      {
+                          data_name[oid_data[oid_data.length - 2]] = value;
+                      }
+                  }
+                  for (var i = 0; i < snmp_id.length; i++)
+                  {
+                      result = result + '    {\r\n        "{#SNMPINDEX}": "' + snmp_id[i] + '",\r\n';
+                      result = result + '        "{#DATAID}": "' + data_id[snmp_id[i]] + '",\r\n';
+                      result = result + '        "{#DATANAME}": ' + data_name[snmp_id[i]] + '\r\n    }';
+                      if (i == snmp_id.length - 1)
+                      {
+                          result = result + '\r\n';
+                      }
+                      else
+                      {
+                          result = result + ',\r\n';
+                      }
+                  }
+                  result = result + ']';
+                  return (result);
+        - uuid: 060e2fa4b1fc47bf99f6dfdcfad15cc7
+          name: switchvoxVoipProviders.discovery
+          type: SNMP_AGENT
+          snmp_oid: 'walk[.1.3.6.1.4.1.22736.10.2.3]'
+          key: switchvoxVoipProviders.discovery
+          delay: 1h
+          description: |
+            MIB: SWITCHVOX-MIB
+            Table with details of the currently active voip providers.
+            ::= { switchvoxVoipProviders 3 }
+            SvoxVoipProvEntry ::= SEQUENCE {
+                svoxVoipProvId	  Integer32,
+                svoxVoipProvName	  DisplayString,
+                svoxVoipProvHost	  DisplayString,
+                svoxVoipProvAcctId      Integer32,
+                svoxVoipProvCallBack    Integer32,
+                svoxVoipProvLatency     Integer32,
+                svoxVoipProvState	  DisplayString
+            }
+          item_prototypes:
+            - uuid: d6c97d97332d417da104f24dcbc9f6dc
+              name: 'switchvoxVoipProviders {#DATAID}({#DATANAME}): svoxVoipProvLatency'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.7'
+              key: 'switchvoxVoipProviders[svoxVoipProvLatency.{#DATAID}]'
+              delay: 1h
+              value_type: TEXT
+              description: |
+                MIB: SWITCHVOX-MIB
+                The VOIP Provider Latency
+            - uuid: 7335ce5b21144d4ebb2f4f1a8ca0d104
+              name: 'switchvoxVoipProviders {#DATAID}({#DATANAME}): svoxVoipProvState'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.8'
+              key: 'switchvoxVoipProviders[svoxVoipProvState.{#DATAID}]'
+              delay: 1h
+              value_type: TEXT
+              description: |
+                MIB: SWITCHVOX-MIB
+                The VOIP Provider State
+            - uuid: 42bc67a9572c4ce892daf4cd6ec0a19e
+              name: 'switchvoxVoipProviders {#DATAID}({#DATANAME}): svoxVoipProvType'
+              type: SNMP_AGENT
+              snmp_oid: '.1.3.6.1.4.1.22736.10.2.3.{#SNMPINDEX}.2'
+              key: 'switchvoxVoipProviders[svoxVoipProvType.{#DATAID}]'
+              delay: 1h
+              value_type: TEXT
+              description: |
+                MIB: SWITCHVOX-MIB
+                The VOIP Provider Type
+          preprocessing:
+            - type: JAVASCRIPT
+              parameters:
+                - |
+                  Array.prototype.contains = function(obj) {
+                  var i = this.length;
+                  while (i--) {
+                      if (this[i] === obj) {
+                          return true;
+                      }
+                  }
+                  return false;
+                  }
+                  var arr = value.split("\n");
+                  var snmp_id = [];
+                  var data_id = {};
+                  var data_name = {};
+                  var result = "[\r\n";
+                  for (var i = 0; i < arr.length; i++)
+                  {
+                      var test = arr[i].split(': ');
+                      var value = test[1];
+                      test = test[0].split(' = ');
+                      var oid_data = test[0].split('.');
+                      if (!snmp_id.contains(oid_data[oid_data.length - 2]))
+                      {
+                          snmp_id.push(oid_data[oid_data.length - 2])
+                      }
+                      if (oid_data[oid_data.length -1] == '1')
+                      {
+                          data_id[oid_data[oid_data.length - 2]] = value;
+                      }
+                      else if (oid_data[oid_data.length - 1] == '3')
+                      {
+                          data_name[oid_data[oid_data.length - 2]] = value;
+                      }
+                  }
+                  for (var i = 0; i < snmp_id.length; i++)
+                  {
+                      result = result + '    {\r\n        "{#SNMPINDEX}": "' + snmp_id[i] + '",\r\n';
+                      result = result + '        "{#DATAID}": "' + data_id[snmp_id[i]] + '",\r\n';
+                      result = result + '        "{#DATANAME}": ' + data_name[snmp_id[i]] + '\r\n    }';
+                      if (i == snmp_id.length - 1)
+                      {
+                          result = result + '\r\n';
+                      }
+                      else
+                      {
+                          result = result + ',\r\n';
+                      }
+                  }
+                  result = result + ']';
+                  return (result);
+      macros:
+        - macro: '{$HARDWARE.LOAD.CLEAR}'
+          value: '4'
+        - macro: '{$HARDWARE.LOAD.CRIT}'
+          value: '7'
+        - macro: '{$HARDWARE.LOAD.WARN}'
+          value: '5'
+        - macro: '{$INFO.CALLS.WARN}'
+          value: '15'
+        - macro: '{$INFO.FEATPK.WARN}'
+          value: '95'
+        - macro: '{$INFO.NUMEXT.WARN}'
+          value: '95'
+        - macro: '{$MEMORY.UTIL.CLEAR}'
+          value: '40'
+        - macro: '{$MEMORY.UTIL.CRIT}'
+          value: '70'
+        - macro: '{$MEMORY.UTIL.WARN}'
+          value: '50'
+        - macro: '{$PHONE.STATUS.WARN}'
+          value: '90'
+        - macro: '{$SUB.DAYSLEFT.CRIT}'
+          value: '30'
+        - macro: '{$SUB.DAYSLEFT.WARN}'
+          value: '90'
+        - macro: '{$VOIP.STATUS.WARN}'
+          value: '90'
